@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sports Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #1a1a1a; color: white; padding: 20px; }
+        .match-card { border: 1px solid #444; padding: 20px; margin: 15px auto; max-width: 400px; border-radius: 10px; background: #222; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .live-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
+        .odds-container { display: flex; justify-content: space-around; margin-top: 15px; }
+        .odds-box { background: #333; padding: 10px; border-radius: 5px; min-width: 80px; cursor: pointer; transition: 0.3s; }
+        .odds-box:hover { background: #444; }
+        .odds-val { color: #00ff6c; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Betting Demo</h1>
+    <p>সরাসরি মোবাইল দিয়ে তৈরি করা লাইভ ডেমো সাইট</p>
+    
+    <div class="match-card">
+        <button class="live-btn">● Live</button>
+        <h3>Bangladesh vs India</h3>
+        <p>T20 World Cup</p>
+        <div class="odds-container">
+            <div class="odds-box">
+                <div>BD (1)</div>
+                <div class="odds-val" id="odds-bd">1.85</div>
+            </div>
+            <div class="odds-box">
+                <div>IND (2)</div>
+                <div class="odds-val" id="odds-ind">2.10</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ডেমো লাইভ রেট সেকেন্ডে সেকেন্ডে পরিবর্তন করার জন্য সিম্পল স্ক্রিপ্ট
+        setInterval(() => {
+            let randomBD = (1.5 + Math.random() * 1.2).toFixed(2);
+            let randomIND = (1.5 + Math.random() * 1.2).toFixed(2);
+            document.getElementById('odds-bd').innerText = randomBD;
+            document.getElementById('odds-ind').innerText = randomIND;
+        }, 3000); // প্রতি ৩ সেকেন্ড পর পর রেট পরিবর্তন হবে
+    </script>
+</body>
+</html>
