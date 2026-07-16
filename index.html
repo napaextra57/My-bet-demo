@@ -1,47 +1,367 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Sports Demo</title>
+    <title>Afi Sports & Casino Demo</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: #1a1a1a; color: white; padding: 20px; }
-        .match-card { border: 1px solid #444; padding: 20px; margin: 15px auto; max-width: 400px; border-radius: 10px; background: #222; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .live-btn { background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
-        .odds-container { display: flex; justify-content: space-around; margin-top: 15px; }
-        .odds-box { background: #333; padding: 10px; border-radius: 5px; min-width: 80px; cursor: pointer; transition: 0.3s; }
-        .odds-box:hover { background: #444; }
-        .odds-val { color: #00ff6c; font-size: 18px; font-weight: bold; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            margin: 0;
+            padding: 10px;
+        }
+        header {
+            background: linear-gradient(135deg, #111827, #1e1b4b);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #f59e0b;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #f59e0b;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .section-header {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin: 15px 0 8px 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .sport-section {
+            background-color: #111827;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .sport-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .match-card {
+            background-color: #070a13;
+            border-radius: 6px;
+            padding: 10px;
+        }
+        .teams {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #f8fafc;
+        }
+        .score {
+            font-size: 13px;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+        .odds-container {
+            display: flex;
+            gap: 8px;
+        }
+        .odds-box {
+            flex: 1;
+            background-color: #111827;
+            border: 1px solid #374151;
+            border-radius: 4px;
+            padding: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .odds-box:hover {
+            background-color: #3b82f6;
+            border-color: #60a5fa;
+            color: #fff;
+        }
+        .odds-name {
+            font-size: 10px;
+            color: #94a3b8;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .odds-val {
+            font-size: 13px;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        /* Casino Styles */
+        .casino-card {
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            border-left: 5px solid #d946ef;
+        }
+        .casino-title {
+            color: #d946ef;
+        }
+        .casino-grid {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .casino-game {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid #4a044e;
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+        .game-name {
+            font-size: 11px;
+            color: #c084fc;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .game-result {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f43f5e;
+            background-color: #000;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #d946ef;
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #4b5563;
+            margin-top: 25px;
+            padding: 10px;
+            border-top: 1px solid #1f2937;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to My Betting Demo</h1>
-    <p>সরাসরি মোবাইল দিয়ে তৈরি করা লাইভ ডেমো সাইট</p>
-    
-    <div class="match-card">
-        <button class="live-btn">● Live</button>
-        <h3>Bangladesh vs India</h3>
-        <p>T20 World Cup</p>
-        <div class="odds-container">
-            <div class="odds-box">
-                <div>BD (1)</div>
-                <div class="odds-val" id="odds-bd">1.85</div>
-            </div>
-            <div class="odds-box">
-                <div>IND (2)</div>
-                <div class="odds-val" id="odds-ind">2.10</div>
+
+<div class="container">
+    <header>
+        <h1>Afi Sports & Casino Demo</h1>
+        <p>স্পোর্টস বুক এবং লাইভ ক্যাসিনো ড্যাশবোর্ড (৩ সেকেন্ড পর পর আপডেট হয়)</p>
+    </header>
+
+    <div class="section-header">🏆 লাইভ স্পোর্টস বুক</div>
+
+    <!-- ক্রিকেট সেকশন -->
+    <div class="sport-section">
+        <div class="sport-title">
+            <span>🏏 ক্রিকেট</span>
+            <span style="color: #10b981; font-size: 11px;">● LIVE</span>
+        </div>
+        <div class="match-card">
+            <div class="teams" id="cri-teams">বাংলাদেশ বনাম ভারত</div>
+            <div class="score" id="cri-score">বাংলাদেশ: ১২৫/৩ (১৪.২ ওভার)</div>
+            <div class="odds-container">
+                <div class="odds-box">
+                    <span class="odds-name">বাংলাদেশ</span>
+                    <span class="odds-val" id="cri-odds1">১.৮৫</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">ভারত</span>
+                    <span class="odds-val" id="cri-odds2">২.১০</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // ডেমো লাইভ রেট সেকেন্ডে সেকেন্ডে পরিবর্তন করার জন্য সিম্পল স্ক্রিপ্ট
-        setInterval(() => {
-            let randomBD = (1.5 + Math.random() * 1.2).toFixed(2);
-            let randomIND = (1.5 + Math.random() * 1.2).toFixed(2);
-            document.getElementById('odds-bd').innerText = randomBD;
-            document.getElementById('odds-ind').innerText = randomIND;
-        }, 3000); // প্রতি ৩ সেকেন্ড পর পর রেট পরিবর্তন হবে
-    </script>
+    <!-- ফুটবল সেকশন -->
+    <div class="sport-section" style="border-left-color: #10b981;">
+        <div class="sport-title" style="color: #10b981;">
+            <span>⚽ ফুটবল</span>
+            <span style="color: #10b981; font-size: 11px;">● LIVE</span>
+        </div>
+        <div class="match-card">
+            <div class="teams" id="foot-teams">ব্রাজিল বনাম আর্জেন্টিনা</div>
+            <div class="score" id="foot-score">ব্রাজিল ১ - ২ আর্জেন্টিনা (৬২ মিনিট)</div>
+            <div class="odds-container">
+                <div class="odds-box">
+                    <span class="odds-name">ব্রাজিল</span>
+                    <span class="odds-val" id="foot-odds1">৩.৪০</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">DRAW</span>
+                    <span class="odds-val" id="foot-odds-draw">২.৮০</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">আর্জেন্টিনা</span>
+                    <span class="odds-val" id="foot-odds2">১.৬৫</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- টেনিস সেকশন -->
+    <div class="sport-section" style="border-left-color: #eab308;">
+        <div class="sport-title" style="color: #eab308;">
+            <span>🎾 টেনিস</span>
+            <span style="color: #10b981; font-size: 11px;">● LIVE</span>
+        </div>
+        <div class="match-card">
+            <div class="teams" id="tennis-teams">নোভাক জোকোভিচ বনাম রাফায়েল নাদাল</div>
+            <div class="score" id="tennis-score">সেট ১-১ | গেম ৪-৩ (৪০-৩০)</div>
+            <div class="odds-container">
+                <div class="odds-box">
+                    <span class="odds-name">জোকোভিচ</span>
+                    <span class="odds-val" id="tennis-odds1">১.৭৫</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">নাদাল</span>
+                    <span class="odds-val" id="tennis-odds2">২.০৫</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- হকি সেকশন -->
+    <div class="sport-section" style="border-left-color: #06b6d4;">
+        <div class="sport-title" style="color: #06b6d4;">
+            <span>🏑 হকি</span>
+            <span style="color: #10b981; font-size: 11px;">● LIVE</span>
+        </div>
+        <div class="match-card">
+            <div class="teams" id="hockey-teams">জার্মানি বনাম অস্ট্রেলিয়া</div>
+            <div class="score" id="hockey-score">জার্মানি ২ - ২ অস্ট্রেলিয়া (৩য় কোয়ার্টার)</div>
+            <div class="odds-container">
+                <div class="odds-box">
+                    <span class="odds-name">জার্মানি</span>
+                    <span class="odds-val" id="hockey-odds1">২.২০</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">DRAW</span>
+                    <span class="odds-val" id="hockey-odds-draw">৩.১০</span>
+                </div>
+                <div class="odds-box">
+                    <span class="odds-name">অস্ট্রেলিয়া</span>
+                    <span class="odds-val" id="hockey-odds2">১.৯০</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">🎰 লাইভ ক্যাসিনো</div>
+
+    <!-- ক্যাসিনো সেকশন -->
+    <div class="sport-section casino-card">
+        <div class="sport-title casino-title">
+            <span>✨ ক্যাসিনো লবি</span>
+            <span style="color: #d946ef; font-size: 11px;">● LIVE SPINS</span>
+        </div>
+        <div class="casino-grid">
+            <div class="casino-game">
+                <span class="game-name">🎡 লাইভ রুলেট</span>
+                <div class="game-result" id="roulette-val">লাল ৩২</div>
+            </div>
+            <div class="casino-game">
+                <span class="game-name">🎰 লাকি স্লটস</span>
+                <div class="game-result" id="slots-val">🍒 | 🍋 | 🍒</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © ২০২৬ Afi Sports & Casino • শিক্ষামূলক ডেমো প্রজেক্ট
+    </div>
+</div>
+
+<script>
+    const slotsIcons = ['🍒', '🍋', '🍇', '🔔', '💎', '7️⃣'];
+    const rouletteColors = ['লাল', 'ಕಾಲೊ'];
+
+    function updateAllData() {
+        // ১. ক্রিকেট লাইভ স্কোর ও রেট আপডেট
+        const runs = Math.floor(Math.random() * 5) + 1;
+        const wickets = Math.random() > 0.88 ? 1 : 0;
+        let criScoreText = document.getElementById('cri-score').innerText;
+        let currentRuns = parseInt(criScoreText.match(/১২৫|[\d]+/)[0]);
+        let currentWickets = parseInt(criScoreText.split('/')[1]);
+        
+        let nextRuns = currentRuns + runs;
+        let nextWickets = currentWickets + wickets;
+        if(nextWickets > 10) nextWickets = 3;
+        if(nextRuns > 230) nextRuns = 125;
+        
+        document.getElementById('cri-score').innerText = `বাংলাদেশ: ${nextRuns}/${nextWickets} (১৪.${Math.floor(Math.random() * 6)} ওভার)`;
+        document.getElementById('cri-odds1').innerText = (1.45 + Math.random() * 0.9).toFixed(2);
+        document.getElementById('cri-odds2').innerText = (1.65 + Math.random() * 1.1).toFixed(2);
+
+        // ২. ফুটবল স্কোর ও রেট আপডেট
+        let footScoreText = document.getElementById('foot-score').innerText;
+        let minute = parseInt(footScoreText.match(/\d+ মিনিট/)[0]);
+        let nextMinute = minute + 1;
+        if(nextMinute > 90) nextMinute = 62;
+        
+        let goalB = Math.random() > 0.96 ? 1 : 0;
+        let goalA = Math.random() > 0.96 ? 1 : 0;
+        let currentGoalB = parseInt(footScoreText.match(/ব্রাজিল \d+/)[0].replace('ব্রাজিল ', '')) + goalB;
+        let currentGoalA = parseInt(footScoreText.match(/\d+ আর্জেন্টিনা/)[0]) + goalA;
+        if(currentGoalB > 5) currentGoalB = 1;
+        if(currentGoalA > 5) currentGoalA = 2;
+
+        document.getElementById('foot-score').innerText = `ব্রাজিল ${currentGoalB} - ${currentGoalA} আর্জেন্টিনা (${nextMinute} মিনিট)`;
+        document.getElementById('foot-odds1').innerText = (2.10 + Math.random() * 1.5).toFixed(2);
+        document.getElementById('foot-odds-draw').innerText = (2.15 + Math.random() * 1.1).toFixed(2);
+        document.getElementById('foot-odds2').innerText = (1.35 + Math.random() * 0.8).toFixed(2);
+
+        // ৩. টেনিস স্কোর ও রেট আপডেট
+        const points = ['0', '15', '30', '40', 'Adv'];
+        let p1 = points[Math.floor(Math.random() * points.length)];
+        let p2 = points[Math.floor(Math.random() * points.length)];
+        if(p1 === 'Adv' && p2 === 'Adv') p2 = '40';
+        document.getElementById('tennis-score').innerText = `সেট ১-১ | গেম ৪-৩ (${p1}-${p2})`;
+        document.getElementById('tennis-odds1').innerText = (1.40 + Math.random() * 0.8).toFixed(2);
+        document.getElementById('tennis-odds2').innerText = (1.60 + Math.random() * 1.0).toFixed(2);
+
+        // ৪. হকি রেট আপডেট
+        document.getElementById('hockey-odds1').innerText = (1.85 + Math.random() * 1.3).toFixed(2);
+        document.getElementById('hockey-odds-draw').innerText = (2.40 + Math.random() * 1.4).toFixed(2);
+        document.getElementById('hockey-odds2').innerText = (1.60 + Math.random() * 1.1).toFixed(2);
+
+        // ৫. ক্যাসিনো আপডেট
+        // রুলেট
+        const number = Math.floor(Math.random() * 37);
+        const color = number === 0 ? 'সবুজ' : rouletteColors[Math.floor(Math.random() * 2)];
+        document.getElementById('roulette-val').innerText = `${color} ${number}`;
+
+        // স্লটস
+        const s1 = slotsIcons[Math.floor(Math.random() * slotsIcons.length)];
+        const s2 = slotsIcons[Math.floor(Math.random() * slotsIcons.length)];
+        const s3 = slotsIcons[Math.floor(Math.random() * slotsIcons.length)];
+        document.getElementById('slots-val').innerText = `${s1} | ${s2} | ${s3}`;
+    }
+
+    // প্রতি ৩ সেকেন্ডে ডেটা চেঞ্জ হবে
+    setInterval(updateAllData, 3000);
+</script>
+
 </body>
 </html>
