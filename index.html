@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afi Premium Sports - Live Odds</title>
+    <title>Afi Premium Fancy Sports & Live TV</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -13,6 +11,7 @@
             --accent-yellow: #f59e0b;
             --accent-blue: #3b82f6;
             --accent-green: #10b981;
+            --accent-red: #ef4444;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1f2937;
@@ -33,7 +32,7 @@
 
         header {
             background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
-            padding: 25px 20px;
+            padding: 20px 15px;
             text-align: center;
             border: 1px solid var(--border-color);
             border-bottom: 3px solid var(--accent-yellow);
@@ -44,7 +43,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 26px;
+            font-size: 24px;
             color: var(--accent-yellow);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -55,6 +54,34 @@
             margin: 8px 0 0 0;
             font-size: 13px;
             color: var(--text-muted);
+        }
+
+        /* ভিডিও প্লেয়ার সেকশন */
+        .video-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .section-header {
@@ -83,13 +110,6 @@
             margin-bottom: 15px;
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .sport-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.4);
-            border-color: #374151;
         }
 
         .match-header {
@@ -128,9 +148,18 @@
             line-height: 1.4;
         }
 
+        .market-title {
+            font-size: 12px;
+            color: var(--accent-yellow);
+            margin: 12px 0 6px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
         .odds-container {
             display: flex;
             gap: 10px;
+            margin-bottom: 10px;
         }
 
         .odds-box {
@@ -140,22 +169,6 @@
             border-radius: 8px;
             padding: 10px 5px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .odds-box:hover {
-            background-color: var(--accent-blue);
-            border-color: #60a5fa;
-            color: #fff;
-        }
-
-        .odds-box:hover .odds-name {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .odds-box:hover .odds-val {
-            color: #fff;
         }
 
         .odds-name {
@@ -171,7 +184,7 @@
         .odds-val {
             font-size: 14px;
             font-weight: bold;
-            color: var(--accent-yellow);
+            color: #ffffff;
         }
 
         .loading, .error-msg, .no-match {
@@ -181,11 +194,6 @@
             background-color: var(--card-bg);
             border-radius: 12px;
             border: 1px solid var(--border-color);
-        }
-
-        .error-msg {
-            color: #f87171;
-            border-color: rgba(248, 113, 113, 0.2);
         }
 
         .footer {
@@ -202,13 +210,29 @@
 
 <div class="container">
     <header>
-        <h1>Afi Premium Sports</h1>
-        <p>বিশ্বমানের বুকমেকারদের থেকে রিয়েল-টাইম আন্তর্জাতিক ম্যাচের আসল লাইভ ও আপকামিং বেটিং অডস</p>
+        <h1>Afi Live TV & Fancy Sports</h1>
+        <p>লাইভ ভিডিও স্ট্রিমিং এবং আন্তর্জাতিক ম্যাচের ফেন্সি বেটিং ড্যাশবোর্ড</p>
     </header>
 
-    <div class="section-header">🔥 গ্লোবাল লাইভ ও আপকামিং ম্যাচসমূহ (Live & Upcoming Odds)</div>
+    <!-- ১. লাইভ ভিডিও প্লেয়ার সেকশন -->
+    <div class="section-header">📺 সরাসরি লাইভ খেলা সম্প্রচার (Live Stream)</div>
+    <div class="video-container">
+        <div class="video-wrapper">
+            <!-- এখানে আপনার কাঙ্ক্ষিত ভিডিওর লিঙ্কটি বসাবেন (ইউটিউব/ফেসবুক এমবেড কোড) -->
+            <iframe 
+                src="https://www.youtube.com/embed/live_stream?channel=UCq0OuwPkTC_V7A5-E-6m2Mg" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin: 10px 0 0 0; text-align: center;">
+            🔴 বর্তমানে আন্তর্জাতিক সম্প্রচারিত লাইভ ম্যাচ দেখার প্লেয়ার উইন্ডো।
+        </p>
+    </div>
+
+    <!-- ২. ফেন্সি বেটিং অডস সেকশন -->
+    <div class="section-header">🔥 গ্লোবাল রিয়েল-টাইম ফেন্সি মার্কেট (Live & Upcoming Odds)</div>
     <div id="odds-list">
-        <div class="loading">লাইভ স্পোর্টস ডাটা লোড হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।</div>
+        <div class="loading">ফেন্সি অডস ডাটা লোড হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।</div>
     </div>
     
     <div class="footer">
@@ -217,18 +241,15 @@
 </div>
 
 <script>
-    // আপনার অ্যাক্টিভ API Key
     const API_KEY = 'ec75c1d76f8f59e9ade916990fc878f6'; 
 
-    async function fetchUpcomingOdds() {
-        // 'upcoming' এবং 'regions=eu' ব্যবহারের মাধ্যমে সঠিক দশমিক আন্তর্জাতিক অডস লোড হবে
-        const url = `https://api.the-odds-api.com/v4/sports/upcoming/odds/?regions=eu&oddsFormat=decimal&apiKey=${API_KEY}`;
+    async function fetchAdvancedOdds() {
+        const url = `https://api.the-odds-api.com/v4/sports/upcoming/odds/?regions=eu&markets=h2h,spreads,totals&oddsFormat=decimal&apiKey=${API_KEY}`;
         
         try {
             const response = await fetch(url);
-            
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`API Error: ${response.status}`);
             }
 
             const data = await response.json();
@@ -240,63 +261,79 @@
                 return;
             }
 
-            // সর্বোচ্চ ৮টি লাইভ/আপকামিং ম্যাচ ড্যাশবোর্ডে সুন্দরভাবে সাজানো
-            data.slice(0, 8).forEach(match => {
+            data.slice(0, 5).forEach(match => {
                 const homeTeam = match.home_team;
                 const awayTeam = match.away_team;
                 const sportTitle = match.sport_title || "Sports";
                 
-                let homeOdds = 'N/A';
-                let awayOdds = 'N/A';
-                let drawOdds = 'N/A';
+                let h2hHtml = '';
+                let totalsHtml = '';
+                let spreadsHtml = '';
 
                 if (match.bookmakers && match.bookmakers.length > 0) {
-                    // প্রথম বুকমেকারের (সাধারণত Pinnacle বা 1xBet) ডাটা নিয়ে আসা হচ্ছে
-                    const market = match.bookmakers[0].markets.find(m => m.key === 'h2h');
-                    if (market) {
-                        const homeOutcome = market.outcomes.find(o => o.name === homeTeam);
-                        const awayOutcome = market.outcomes.find(o => o.name === awayTeam);
-                        const drawOutcome = market.outcomes.find(o => o.name === 'Draw');
+                    const bookmaker = match.bookmakers[0];
 
-                        if (homeOutcome) homeOdds = homeOutcome.price.toFixed(2);
-                        if (awayOutcome) awayOdds = awayOutcome.price.toFixed(2);
-                        if (drawOutcome) drawOdds = drawOutcome.price.toFixed(2);
+                    // ১. ম্যাচ উইনার (Winner)
+                    const h2hMarket = bookmaker.markets.find(m => m.key === 'h2h');
+                    if (h2hMarket) {
+                        h2hHtml = `<div class="market-title">🏳️ ম্যাচ উইনার (Winner)</div><div class="odds-container">`;
+                        h2hMarket.outcomes.forEach(out => {
+                            h2hHtml += `
+                                <div class="odds-box">
+                                    <span class="odds-name">${out.name}</span>
+                                    <span class="odds-val" style="color: var(--accent-yellow);">${out.price.toFixed(2)}</span>
+                                </div>
+                            `;
+                        });
+                        h2hHtml += `</div>`;
+                    }
+
+                    // ২. ওভার/আন্ডার গোল/রান (Over / Under)
+                    const totalsMarket = bookmaker.markets.find(m => m.key === 'totals');
+                    if (totalsMarket) {
+                        totalsHtml = `<div class="market-title">📊 মোট রান/গোল (Over / Under)</div><div class="odds-container">`;
+                        totalsMarket.outcomes.forEach(out => {
+                            totalsHtml += `
+                                <div class="odds-box">
+                                    <span class="odds-name">${out.name} ${out.point}</span>
+                                    <span class="odds-val" style="color: var(--accent-green);">${out.price.toFixed(2)}</span>
+                                </div>
+                            `;
+                        });
+                        totalsHtml += `</div>`;
+                    }
+
+                    // ৩. পয়েন্ট স্প্রেড (Spreads)
+                    const spreadsMarket = bookmaker.markets.find(m => m.key === 'spreads');
+                    if (spreadsMarket) {
+                        spreadsHtml = `<div class="market-title">⚖️ হ্যান্ডিক্যাপ স্প্রেড (Spreads)</div><div class="odds-container">`;
+                        spreadsMarket.outcomes.forEach(out => {
+                            spreadsHtml += `
+                                <div class="odds-box">
+                                    <span class="odds-name">${out.name} (${out.point > 0 ? '+' + out.point : out.point})</span>
+                                    <span class="odds-val" style="color: var(--accent-blue);">${out.price.toFixed(2)}</span>
+                                </div>
+                            `;
+                        });
+                        spreadsHtml += `</div>`;
                     }
                 }
 
-                // অডস জেনারেট করা
-                let oddsHtml = `
-                    <div class="odds-box">
-                        <span class="odds-name">${homeTeam}</span>
-                        <span class="odds-val">${homeOdds}</span>
-                    </div>
-                `;
-                
-                if (drawOdds !== 'N/A') {
-                    oddsHtml += `
-                        <div class="odds-box">
-                            <span class="odds-name">Draw</span>
-                            <span class="odds-val">${drawOdds}</span>
-                        </div>
-                    `;
+                if (!h2hHtml && !totalsHtml && !spreadsHtml) {
+                    h2hHtml = '<p style="font-size:12px; color:var(--text-muted);">ফেন্সি মার্কেট এই মুহূর্তে বন্ধ রয়েছে।</p>';
                 }
 
-                oddsHtml += `
-                    <div class="odds-box">
-                        <span class="odds-name">${awayTeam}</span>
-                        <span class="odds-val">${awayOdds}</span>
-                    </div>
-                `;
-
-                // ম্যাচ কার্ডের স্ট্রাকচার
                 const matchHtml = `
                     <div class="sport-section">
                         <div class="match-header">
                             <span class="sport-tag">${sportTitle}</span>
-                            <span class="live-badge">● LIVE / UPCOMING</span>
+                            <span class="live-badge">● FANCY ACTIVE</span>
                         </div>
                         <div class="teams">${homeTeam} vs ${awayTeam}</div>
-                        <div class="odds-container">${oddsHtml}</div>
+                        
+                        ${h2hHtml}
+                        ${totalsHtml}
+                        ${spreadsHtml}
                     </div>
                 `;
                 container.innerHTML += matchHtml;
@@ -306,13 +343,12 @@
             document.getElementById('odds-list').innerHTML = `
                 <div class="error-msg">
                     <strong>ডাটা লোড করতে ব্যর্থ হয়েছে!</strong><br>
-                    <span style="font-size: 12px; color: var(--text-muted);">${error.message}</span>
+                    <span style="font-size: 12px;">${error.message}</span>
                 </div>`;
         }
     }
 
-    // পেজ লোড হবার সাথে সাথে লাইভ রান করা
-    fetchUpcomingOdds();
+    fetchAdvancedOdds();
 </script>
 
 </body>
