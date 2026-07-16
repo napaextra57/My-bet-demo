@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -42,7 +44,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 26px;
             color: var(--accent-yellow);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -60,7 +62,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--text-muted);
+            color: var(--accent-blue);
             margin: 25px 0 12px 5px;
             display: flex;
             align-items: center;
@@ -107,6 +109,14 @@
             padding: 2px 8px;
             border-radius: 20px;
             border: 1px solid var(--accent-green);
+            font-size: 10px;
+        }
+
+        .sport-tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding: 2px 8px;
+            border-radius: 4px;
             font-size: 10px;
         }
 
@@ -193,19 +203,117 @@
 <div class="container">
     <header>
         <h1>Afi Premium Sports</h1>
-        <p>বিশ্বমানের বুকমেকারদের থেকে রিয়েল-টাইম আন্তর্জাতিক ম্যাচের আসল লাইভ বেটিং অডস</p>
+        <p>বিশ্বমানের বুকমেকারদের থেকে রিয়েল-টাইম আন্তর্জাতিক ম্যাচের আসল লাইভ ও আপকামিং বেটিং অডস</p>
     </header>
 
-    <div class="section-header">⚽ আন্তর্জাতিক ফুটবল (Soccer)</div>
-    <div id="football-list">
-        <div class="loading">লাইভ ফুটবল ডাটা লোড হচ্ছে...</div>
+    <div class="section-header">🔥 গ্লোবাল লাইভ ও আপকামিং ম্যাচসমূহ (Live & Upcoming Odds)</div>
+    <div id="odds-list">
+        <div class="loading">লাইভ স্পোর্টস ডাটা লোড হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।</div>
     </div>
-
-    <div class="section-header">🎾 ওয়ার্ল্ড টেনিস (Tennis ATP)</div>
-    <div id="tennis-list">
-        <div class="loading">লাইভ টেনিস ডাটা লোড হচ্ছে...</div>
+    
+    <div class="footer">
+        © 2026 Afi Premium Sports. Powered by The Odds API.
     </div>
 </div>
 
 <script>
-    //
+    // আপনার অ্যাক্টিভ API Key
+    const API_KEY = 'ec75c1d76f8f59e9ade916990fc878f6'; 
+
+    async function fetchUpcomingOdds() {
+        // 'upcoming' এবং 'regions=eu' ব্যবহারের মাধ্যমে সঠিক দশমিক আন্তর্জাতিক অডস লোড হবে
+        const url = `https://api.the-odds-api.com/v4/sports/upcoming/odds/?regions=eu&oddsFormat=decimal&apiKey=${API_KEY}`;
+        
+        try {
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const container = document.getElementById('odds-list');
+            container.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="no-match">এই মুহূর্তে কোনো ম্যাচ লাইভ বা আপকামিং পাওয়া যায়নি।</div>';
+                return;
+            }
+
+            // সর্বোচ্চ ৮টি লাইভ/আপকামিং ম্যাচ ড্যাশবোর্ডে সুন্দরভাবে সাজানো
+            data.slice(0, 8).forEach(match => {
+                const homeTeam = match.home_team;
+                const awayTeam = match.away_team;
+                const sportTitle = match.sport_title || "Sports";
+                
+                let homeOdds = 'N/A';
+                let awayOdds = 'N/A';
+                let drawOdds = 'N/A';
+
+                if (match.bookmakers && match.bookmakers.length > 0) {
+                    // প্রথম বুকমেকারের (সাধারণত Pinnacle বা 1xBet) ডাটা নিয়ে আসা হচ্ছে
+                    const market = match.bookmakers[0].markets.find(m => m.key === 'h2h');
+                    if (market) {
+                        const homeOutcome = market.outcomes.find(o => o.name === homeTeam);
+                        const awayOutcome = market.outcomes.find(o => o.name === awayTeam);
+                        const drawOutcome = market.outcomes.find(o => o.name === 'Draw');
+
+                        if (homeOutcome) homeOdds = homeOutcome.price.toFixed(2);
+                        if (awayOutcome) awayOdds = awayOutcome.price.toFixed(2);
+                        if (drawOutcome) drawOdds = drawOutcome.price.toFixed(2);
+                    }
+                }
+
+                // অডস জেনারেট করা
+                let oddsHtml = `
+                    <div class="odds-box">
+                        <span class="odds-name">${homeTeam}</span>
+                        <span class="odds-val">${homeOdds}</span>
+                    </div>
+                `;
+                
+                if (drawOdds !== 'N/A') {
+                    oddsHtml += `
+                        <div class="odds-box">
+                            <span class="odds-name">Draw</span>
+                            <span class="odds-val">${drawOdds}</span>
+                        </div>
+                    `;
+                }
+
+                oddsHtml += `
+                    <div class="odds-box">
+                        <span class="odds-name">${awayTeam}</span>
+                        <span class="odds-val">${awayOdds}</span>
+                    </div>
+                `;
+
+                // ম্যাচ কার্ডের স্ট্রাকচার
+                const matchHtml = `
+                    <div class="sport-section">
+                        <div class="match-header">
+                            <span class="sport-tag">${sportTitle}</span>
+                            <span class="live-badge">● LIVE / UPCOMING</span>
+                        </div>
+                        <div class="teams">${homeTeam} vs ${awayTeam}</div>
+                        <div class="odds-container">${oddsHtml}</div>
+                    </div>
+                `;
+                container.innerHTML += matchHtml;
+            });
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            document.getElementById('odds-list').innerHTML = `
+                <div class="error-msg">
+                    <strong>ডাটা লোড করতে ব্যর্থ হয়েছে!</strong><br>
+                    <span style="font-size: 12px; color: var(--text-muted);">${error.message}</span>
+                </div>`;
+        }
+    }
+
+    // পেজ লোড হবার সাথে সাথে লাইভ রান করা
+    fetchUpcomingOdds();
+</script>
+
+</body>
+</html>
