@@ -3,63 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afi Premium - Management System</title>
+    <title>Afi Premium - Sports Exchange</title>
     <style>
+        /* CSS এর অংশ */
         body { font-family: sans-serif; background-color: #0b0f19; color: white; margin: 0; }
-        .view { display: none; padding: 20px; }
+        .view { display: none; padding: 15px; padding-bottom: 70px; }
         .active { display: block; }
-        .panel-btn { background: #3b82f6; padding: 15px; margin: 10px 0; border-radius: 8px; cursor: pointer; text-align: center; }
+        
+        /* লগইন স্টাইল */
         #login-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:#0b0f19; z-index:9999; display:flex; align-items:center; justify-content:center; }
+        .login-box { background:#111827; padding:25px; border-radius:12px; width:85%; border:1px solid #334155; text-align:center; }
+        
+        /* ড্যাশবোর্ড কার্ড স্টাইল */
+        .card { background: #1f2937; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #f59e0b; }
+        .live-score { color: #10b981; font-weight: bold; font-size: 18px; }
+        .btn-action { background: #ef4444; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; margin-top: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div id="login-overlay">
-    <div style="background:#111827; padding:25px; border-radius:12px; width:80%; max-width:300px; border:1px solid #334155; text-align:center;">
-        <h2 style="margin-bottom:20px;">Login Panel</h2>
+    <div class="login-box">
+        <h2>Afi Login</h2>
         <select id="role-select" style="width:100%; padding:10px; margin-bottom:10px;">
             <option value="user">User</option>
             <option value="master">Master Agent</option>
             <option value="super">Super Agent</option>
         </select>
         <input type="text" id="username" placeholder="Username" style="width:100%; padding:10px; margin-bottom:10px;">
-        <input type="password" id="password" placeholder="Password" style="width:100%; padding:10px; margin-bottom:20px;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:#ef4444; border:none; color:white; cursor:pointer;">Login</button>
+        <button onclick="checkLogin()" class="btn-action">Login</button>
     </div>
 </div>
 
-<div id="super-panel" class="view">
-    <h1>Super Agent Panel</h1>
-    <div class="panel-btn">Create Master Agent Account</div>
-    <div class="panel-btn">View All Masters & Balances</div>
-</div>
+<div id="main-view" class="view">
+    <h1>Live Matches</h1>
+    
+    <div class="card">
+        <div>England vs India (Test)</div>
+        <div class="live-score">ENG 233/4 (70.2 ov)</div>
+        <button class="btn-action" onclick="alert('Betting Open!')">Place Bet</button>
+    </div>
 
-<div id="master-panel" class="view">
-    <h1>Master Agent Panel</h1>
-    <div class="panel-btn">Create User Account</div>
-    <div class="panel-btn">Manage User Deposits/Withdrawals</div>
-</div>
-
-<div id="user-panel" class="view">
-    <h1>Welcome, User!</h1>
-    <div class="panel-btn">Live Sports Dashboard</div>
-    <div class="panel-btn">Aviator Game</div>
+    <div class="card">
+        <div>Bangladesh vs Australia (T20)</div>
+        <div class="live-score">BAN 150/6 (18.1 ov)</div>
+        <button class="btn-action" onclick="alert('Betting Open!')">Place Bet</button>
+    </div>
 </div>
 
 <script>
     function checkLogin() {
-        const role = document.getElementById('role-select').value;
+        // লগইন সাকসেস হলে লগইন ওভারলে সরিয়ে দিবে
         document.getElementById('login-overlay').style.display = 'none';
-        
-        // রোল অনুযায়ী প্যানেল দেখানো
-        if(role === 'super') switchView('super-panel');
-        else if(role === 'master') switchView('master-panel');
-        else switchView('user-panel');
-    }
-
-    function switchView(viewId) {
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById(viewId).classList.add('active');
+        document.getElementById('main-view').classList.add('active');
+        alert("Welcome to AfiBet!");
     }
 </script>
 
